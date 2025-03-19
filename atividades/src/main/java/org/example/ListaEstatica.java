@@ -15,7 +15,14 @@ public class ListaEstatica {
     private void redimensionar()
     {
         int[] novoVetor = new int[info.length + 10];
-        System.arraycopy(info, 0, novoVetor, 0, info.length);
+
+        // cria uma copia do vetor
+        // System.arraycopy(info, 0, novoVetor, 0, info.length);
+
+        for (int i = 0; i < tamanho - 1; i++) {
+            novoVetor[i] = info[i];
+        }
+
         info = novoVetor;
     }
 
