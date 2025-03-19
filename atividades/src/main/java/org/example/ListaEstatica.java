@@ -101,10 +101,17 @@ public class ListaEstatica {
     @Override
     public String toString()
     {
+        if (tamanho == 0)
+            return "";
+
         StringBuilder texto = new StringBuilder();
         for (int i = 0; i < tamanho; i++) {
-            texto.append(info[i]).append(",");
+            if (i > 0)
+                texto.append(",");
+
+            texto.append(info[i]);
         }
+
         return texto.toString();
     }
 }

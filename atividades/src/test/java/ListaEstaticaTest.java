@@ -11,7 +11,7 @@ public class ListaEstaticaTest {
         lista.inserir(10);
         lista.inserir(15);
         lista.inserir(20);
-        assertEquals("5,10,15,20,", lista.toString());
+        assertEquals("5,10,15,20", lista.toString());
     }
 
     @Test
@@ -52,7 +52,7 @@ public class ListaEstaticaTest {
         lista.inserir(15);
         lista.inserir(20);
         lista.retirar(10);
-        assertEquals("5,15,20,", lista.toString());
+        assertEquals("5,15,20", lista.toString());
         assertEquals(3, lista.getTamanho());
     }
 
@@ -62,7 +62,7 @@ public class ListaEstaticaTest {
         for (int i = 1; i <= 15; i++) {
             lista.inserir(i);
         }
-        assertEquals("1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,", lista.toString());
+        assertEquals("1,2,3,4,5,6,7,8,9,10,11,12,13,14,15", lista.toString());
         assertEquals(15, lista.getTamanho());
     }
 
