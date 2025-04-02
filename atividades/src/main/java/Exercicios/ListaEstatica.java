@@ -1,22 +1,20 @@
-package org.example;
+package Exercicios;
 
-public class ListaEstaticaGenerica<T> {
-    private T[] info;
+public class ListaEstatica {
+    private int[] info;
     private int tamanho;
 
-    @SuppressWarnings("unchecked")
-    public ListaEstaticaGenerica()
+    public ListaEstatica()
     {
-        info = (T[]) new Object[10];
+        info = new int[10];
         tamanho = 0;
     }
 
-    @SuppressWarnings({"unchecked", "ManualArrayCopy"})
-    /// Aumenta o tamanho do vetor em 10
+    /// aumenta o tamanho do vetor em 10
     /// caso chegue no tamanho maximo
     private void redimensionar()
     {
-        T[] novoVetor = (T[]) new Object[info.length + 10];
+        int[] novoVetor = new int[info.length + 10];
 
         // cria uma copia do vetor
         // System.arraycopy(info, 0, novoVetor, 0, info.length);
@@ -28,10 +26,10 @@ public class ListaEstaticaGenerica<T> {
         info = novoVetor;
     }
 
-    /// Insere o valor na última posição
+    /// insere o valor na ultima posição
     /// caso não tenha mais tamanho
     /// é aumentado
-    public void inserir(T valor)
+    public void inserir(int valor)
     {
         if (tamanho >= info.length)
         {
@@ -52,10 +50,10 @@ public class ListaEstaticaGenerica<T> {
 
     /// busca algum valor no vetor
     /// @return indice do valor ou -1 caso não existe
-    public int buscar(T valor)
+    public int buscar(int valor)
     {
         for (int i = 0; i < tamanho; i++) {
-            if (info[i].equals(valor))
+            if (info[i] == valor)
             {
                 return i;
             }
@@ -65,32 +63,29 @@ public class ListaEstaticaGenerica<T> {
     }
 
     /// retira um valor do vetor e rearanja o vetor
-    public void retirar(T valor)
+    public void retirar(int valor)
     {
         int indice = buscar(valor);
-
         if (indice != -1) {
             for (int i = indice; i < tamanho - 1; i++) {
                 info[i] = info[i + 1];
             }
-
-            info[tamanho - 1] = null;
+            info[tamanho - 1] = 0;
             tamanho--;
         }
     }
 
-    @SuppressWarnings("unchecked")
     /// volta o vetor ao estado original
     public void liberar()
     {
-        info = (T[]) new Object[10];
+        info = new int[10];
         tamanho = 0;
     }
 
 
     /// pega o valor da posição especificada
     /// @throws IndexOutOfBoundsException caso a posição for invalida
-    public T obterElemento(int posicao)
+    public int obterElemento(int posicao)
     {
         if (posicao < 0 || posicao >= tamanho) {
             throw new IndexOutOfBoundsException("Posição inválida: " + posicao);
@@ -99,7 +94,7 @@ public class ListaEstaticaGenerica<T> {
     }
 
     /// verifica se o vetor está vazio
-    /// @return boleano true se está vazio
+    /// @return boleano
     public boolean estaVazia() {
         return tamanho == 0;
     }
@@ -125,18 +120,5 @@ public class ListaEstaticaGenerica<T> {
         }
 
         return texto.toString();
-    }
-
-    /// inverte a lista, faz o for usando metade do tamanho,
-    /// assim guarda o primeiro elemento, pega o ultimo com base no (i - 1),
-    /// por que index começa no 0 e tamanho começa no 1. Quando tamanho é subtraido
-    /// por i, resulta em sempre pegar o valor oposto da lista.
-    public void inverter()
-    {
-        for (int i = 0; i < tamanho / 2; i++) {
-            T temp = info[i];
-            info[i] = info[tamanho - 1 - i];
-            info[tamanho - 1 - i] = temp;
-        }
     }
 }

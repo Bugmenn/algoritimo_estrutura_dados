@@ -1,4 +1,6 @@
-import org.example.ListaEstatica;
+package ExerciciosTest;
+
+import Exercicios.ListaEstatica;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

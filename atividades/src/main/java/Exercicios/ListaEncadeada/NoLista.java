@@ -1,4 +1,4 @@
-package org.example;
+package Exercicios.ListaEncadeada;
 
 public class NoLista<T> {
 

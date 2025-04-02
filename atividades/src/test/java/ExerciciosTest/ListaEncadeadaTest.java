@@ -1,5 +1,7 @@
-package org.example;
+package ExerciciosTest;
 
+import Exercicios.ListaEncadeada.ListaEncadeada;
+import Exercicios.ListaEncadeada.NoLista;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
