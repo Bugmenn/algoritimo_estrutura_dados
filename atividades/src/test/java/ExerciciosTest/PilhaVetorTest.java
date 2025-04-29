@@ -1,8 +1,8 @@
 package ExerciciosTest;
 
-import Exercicios.Pilha.PilhaCheiaException;
-import Exercicios.Pilha.PilhaVaziaException;
-import Exercicios.Pilha.PilhaVetor;
+import Exercicios.PilhaVetor.PilhaCheiaException;
+import Exercicios.PilhaVetor.PilhaVaziaException;
+import Exercicios.PilhaVetor.PilhaVetor;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

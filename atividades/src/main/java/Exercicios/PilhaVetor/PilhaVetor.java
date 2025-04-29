@@ -1,4 +1,4 @@
-package Exercicios.Pilha;
+package Exercicios.PilhaVetor;
 
 public class PilhaVetor<T> implements Pilha<T> {
 
