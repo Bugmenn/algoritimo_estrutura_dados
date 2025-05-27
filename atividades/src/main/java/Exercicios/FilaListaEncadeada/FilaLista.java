@@ -20,11 +20,17 @@ public class FilaLista<T> implements Fila<T>{
 
     @Override
     public T peek() {
+        if (estaVazia())
+            throw new RuntimeException("Fila Vazia");
+
         return lista.getPrimeiro().getInfo();
     }
 
     @Override
     public T retirar() {
+        if (estaVazia())
+            throw new RuntimeException("Fila Vazia");
+
         T valor = peek();
         lista.retirar(valor);
         return valor;
