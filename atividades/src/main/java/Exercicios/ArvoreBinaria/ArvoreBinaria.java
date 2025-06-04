@@ -25,11 +25,7 @@ public class ArvoreBinaria<T> {
             return false;
         }
 
-        if (no.getInfo().equals(info)) {
-            return true;
-        }
-
-        return pertence(no.getEsquerda(), info) || pertence(no.getDireita(), info);
+        return no.getInfo().equals(info) || pertence(no.getEsquerda(), info) || pertence(no.getDireita(), info);
     }
 
     @Override
