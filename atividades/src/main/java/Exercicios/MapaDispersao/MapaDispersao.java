@@ -1,4 +1,4 @@
-package Exercicios.TabelaDispersao;
+package Exercicios.MapaDispersao;
 
 import Exercicios.ListaEncadeada.ListaEncadeada;
 import Exercicios.ListaEncadeada.NoLista;

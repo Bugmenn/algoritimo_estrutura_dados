@@ -1,4 +1,4 @@
-package Exercicios.TabelaDispersao;
+package Exercicios.MapaDispersao;
 
 public class NoMapa<T> {
 
@@ -29,8 +29,8 @@ public class NoMapa<T> {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        NoMapa<T> other = (NoMapa<T>) obj;
-        if (chave != other.chave)
+        NoMapa<T> objetoTransformado = (NoMapa<T>) obj;
+        if (chave != objetoTransformado.chave)
             return false;
         return true;
     }

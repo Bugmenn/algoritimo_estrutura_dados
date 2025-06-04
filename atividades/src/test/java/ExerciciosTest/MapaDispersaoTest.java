@@ -1,6 +1,6 @@
 package ExerciciosTest;
 
-import Exercicios.TabelaDispersao.*;
+import Exercicios.MapaDispersao.*;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
