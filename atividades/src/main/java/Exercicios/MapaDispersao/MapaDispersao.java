@@ -26,9 +26,7 @@ public class MapaDispersao<T> {
             info[indice] = new ListaEncadeada<>();
         }
 
-        NoMapa<T> noMapa = new NoMapa<>();
-        noMapa.setChave(chave);
-        noMapa.setInfo(dado);
+        NoMapa<T> noMapa = new NoMapa<>(chave, dado);
 
         info[indice].inserir(noMapa);
     }
@@ -38,8 +36,7 @@ public class MapaDispersao<T> {
         int indice = calcularHash(chave);
 
         if (info[indice] != null) {
-            NoMapa<T> noMapa = new NoMapa<>();
-            noMapa.setChave(chave);
+            NoMapa<T> noMapa = new NoMapa<>(chave, null);
 
             info[indice].retirar(noMapa);
         }
@@ -50,8 +47,7 @@ public class MapaDispersao<T> {
         int indice = calcularHash(chave);
 
         if (info[indice] != null) {
-            NoMapa<T> noMapa = new NoMapa<>();
-            noMapa.setChave(chave);
+            NoMapa<T> noMapa = new NoMapa<>(chave, null);
 
             NoLista<NoMapa<T>> no = info[indice].buscar(noMapa);
 

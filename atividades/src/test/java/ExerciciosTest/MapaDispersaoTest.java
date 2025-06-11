@@ -1,6 +1,7 @@
 package ExerciciosTest;
 
 import Exercicios.MapaDispersao.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -9,9 +10,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MapaDispersaoTest {
 
+    MapaDispersao<Aluno> mapaDispersao;
+
+    @BeforeEach
+    void criarMapa() {
+        mapaDispersao = new MapaDispersao<>(53);
+    }
+
     @Test
     void testInserirAndBuscar() {
-        MapaDispersao<Aluno> mapaDispersao = new MapaDispersao<>(53);
         Aluno obj1 = new Aluno(12000, "Jean", LocalDate.of(2000, 1, 1));
 
         mapaDispersao.inserir(12000, obj1);
@@ -21,7 +28,6 @@ class MapaDispersaoTest {
 
     @Test
     void testInserirVariosObjetos() {
-        MapaDispersao<Aluno> mapaDispersao = new MapaDispersao<>(53);
         Aluno aluno1 = new Aluno(12000, "Jean", LocalDate.of(2000, 1, 1));
         Aluno aluno2 = new Aluno(14000, "Pedro", LocalDate.of(1999, 1, 20));
         Aluno aluno3 = new Aluno(12500, "Marta", LocalDate.of(2001, 2, 18));
@@ -41,7 +47,6 @@ class MapaDispersaoTest {
 
     @Test
     void testColisao() {
-        MapaDispersao<Aluno> mapaDispersao = new MapaDispersao<>(53);
         Aluno aluno1 = new Aluno(12000, "Jean", LocalDate.of(2000, 1, 1));
         Aluno aluno2 = new Aluno(14000, "Pedro", LocalDate.of(1999, 1, 20));
         Aluno aluno3 = new Aluno(14226, "Marta", LocalDate.of(2001, 2, 18));

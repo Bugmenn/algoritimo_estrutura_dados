@@ -5,6 +5,11 @@ public class NoMapa<T> {
     private int chave;
     private T info;
 
+    public NoMapa(int chave, T info) {
+        this.chave = chave;
+        this.info = info;
+    }
+
     public int getChave() {
         return chave;
     }
