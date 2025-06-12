@@ -14,9 +14,9 @@ class ArvoreTest {
         NoArvore<Integer> no7 = new NoArvore<>(7);
         NoArvore<Integer> no2 = new NoArvore<>(2);
 
-        no2.inserirFilho(no7);
-        no2.inserirFilho(no6);
         no2.inserirFilho(no5);
+        no2.inserirFilho(no6);
+        no2.inserirFilho(no7);
 
         NoArvore<Integer> no3 = new NoArvore<>(3);
         NoArvore<Integer> no8 = new NoArvore<>(8);
@@ -27,14 +27,14 @@ class ArvoreTest {
         NoArvore<Integer> no9 = new NoArvore<>(9);
         NoArvore<Integer> no10 = new NoArvore<>(10);
 
-        no4.inserirFilho(no10);
         no4.inserirFilho(no9);
+        no4.inserirFilho(no10);
 
         NoArvore<Integer> no1 = new NoArvore<>(1);
 
-        no1.inserirFilho(no4);
-        no1.inserirFilho(no3);
         no1.inserirFilho(no2);
+        no1.inserirFilho(no3);
+        no1.inserirFilho(no4);
 
         Arvore<Integer> arvore = new Arvore<>();
         arvore.setRaiz(no1);

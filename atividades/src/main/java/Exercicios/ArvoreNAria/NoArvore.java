@@ -10,13 +10,22 @@ public class NoArvore<T> {
 
     public NoArvore(T info) {
         this.info = info;
+        this.primeiro = null;
+        this.proximo = null;
     }
 
     /// Dado um nó já criado, definir uma sub-árvore para
     /// este nó
     public void inserirFilho(NoArvore<T> sa) {
-        sa.proximo = primeiro;
-        primeiro = sa;
+        if (this.primeiro == null) {
+            this.primeiro = sa;
+        } else {
+            NoArvore<T> atual = this.primeiro;
+            while (atual.proximo != null) {
+                atual = atual.proximo;
+            }
+            atual.proximo = sa;
+        }
     }
 
     public T getInfo() {

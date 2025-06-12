@@ -5,7 +5,7 @@ public class Arvore<T> {
     private NoArvore<T> raiz;
 
     public Arvore() {
-
+        raiz = null;
     }
 
     public void setRaiz(NoArvore<T> raiz) {
@@ -24,20 +24,22 @@ public class Arvore<T> {
     }
 
     private boolean pertence(NoArvore<T> no, T info) {
-        if (no.getInfo() == info) {
-            return true;
-        } else {
-            NoArvore<T> p = no.getPrimeiro();
-
-            while (p != null) {
-                if (pertence(p, info)) {
-                    return true;
-                }
-                p = p.getProximo();
-            }
-
+        if (no == null) {
             return false;
         }
+        if (no.getInfo().equals(info)) {
+            return true;
+        }
+
+        NoArvore<T> filho = no.getPrimeiro();
+        while (filho != null) {
+            if (pertence(filho, info)) {
+                return true;
+            }
+            filho = filho.getProximo();
+        }
+
+        return false;
     }
 
     @Override
@@ -49,17 +51,17 @@ public class Arvore<T> {
     }
 
     private String obterRepresentacaoTextual(NoArvore<T> no) {
-        String s = "<";
-        s = s + no.getInfo();
-        NoArvore<T> p = no.getPrimeiro();
+        StringBuilder sb = new StringBuilder();
+        sb.append("<").append(no.getInfo());
 
-        while (p != null) {
-            s = s + obterRepresentacaoTextual(p);
-            p = p.getProximo();
+        NoArvore<T> filho = no.getPrimeiro();
+        while (filho != null) {
+            sb.append(obterRepresentacaoTextual(filho));
+            filho = filho.getProximo();
         }
 
-        s = s + ">";
-        return s;
+        sb.append(">");
+        return sb.toString();
     }
 
     public int contaNos() {
