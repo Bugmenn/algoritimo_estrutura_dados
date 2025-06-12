@@ -2,6 +2,8 @@ package Exercicios.ArvoreBinariaBusca;
 
 public class NoArvoreBinaria<T> {
 
+    /// a esquerda fica os filhos menores que o pai e
+    /// a direita fica os maiores
     private NoArvoreBinaria<T> esquerda, direita;
     private T info;
 
