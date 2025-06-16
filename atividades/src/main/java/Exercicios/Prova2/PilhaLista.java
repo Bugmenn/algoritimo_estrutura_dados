@@ -59,13 +59,14 @@ public class PilhaLista<T> implements Pilha<T> {
                 pilha.push(caractere);
             }
             else if (caractere == ')' || caractere == ']' || caractere == '}') {
-
+                // verifica caso a pilha não tenha nada
                 if (pilha.estaVazia()) {
                     return false;
                 }
 
                 char topo = pilha.pop();
 
+                // verifica caso o caracter não seja de acordo com o topo
                 if ((caractere == ')' && topo != '(') || (caractere == ']' && topo != '[')
                         || (caractere == '}' && topo != '{')) {
                     return false;
@@ -73,6 +74,7 @@ public class PilhaLista<T> implements Pilha<T> {
             }
         }
 
+        // verifica no final para que não sobre nada
         return pilha.estaVazia();
     }
 
