@@ -2,9 +2,8 @@ package Trabalho.src.validator;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-
 import Trabalho.src.model.Pilha.PilhaLista;
-import Trabalho.src.model.Tag.ContadorTag;
+import Trabalho.src.model.Tag.CountTag;
 import Trabalho.src.utils.Util;
 
 public class Validator {
@@ -14,51 +13,75 @@ public class Validator {
         "meta", "base", "br", "col", "command", "embed", "hr", "img", "input",
         "link", "param", "source", "!doctype"
     };
-    private final ContadorTag contadorTag = new ContadorTag();
+    /// Contador de tags
+    private final CountTag contadorTag = new CountTag();
+    /// Relatório de validação
     private final StringBuilder report = new StringBuilder();
 
-    public boolean validar(String caminho) {
-        PilhaLista<String> pilhaLista = new PilhaLista<>();
-        int linhaNum = 0;
-        boolean ehComentario = false, ehScript = false, ehStyle = false;
-        boolean estaComErro = false;
+    public String getReport() {
+        return report.toString();
+    }
 
+    public CountTag getCountTag() {
+        return contadorTag;
+    }
+
+    /// Valida as tags do arquivo
+    /// @param caminho URL do arquivo
+    /// @return true se o arquivo está bem formatado, false caso contrário.
+    public boolean validar(String caminho) {
+
+        if (!caminho.toLowerCase().endsWith(".html") && !caminho.toLowerCase().endsWith(".htm")) {
+            report.append("Erro: o arquivo informado não é um arquivo HTML válido (.html ou .htm)\n");
+            return false;
+        }
+
+        PilhaLista<String> pilhaLista = new PilhaLista<>();
+        int numeroLinha = 0;
+        boolean isComent = false, isScript = false, isStyle = false, haveError = false;
+
+        // Inicia o leitor de arquivo
         try (BufferedReader reader = new BufferedReader(new FileReader(caminho))) {
             String linha;
+
             while ((linha = reader.readLine()) != null) {
-                linhaNum++;
+                numeroLinha++;
                 linha = linha.trim();
 
                 if (linha.isEmpty()) 
                     continue;
 
-                int pos = 0;
-                while (pos < linha.length()) {
+                // Anda pela tags no arquivo
+                int position = 0;
+                while (position < linha.length()) {
 
-                    if (ehComentario) {
-                        int fimComentario = linha.indexOf("-->", pos);
+                    // Ignora comentários
+                    if (isComent) {
+                        int fimComentario = linha.indexOf("-->", position);
 
                         if (fimComentario == -1) 
                             break;
                             
-                        pos = fimComentario + 3;
-                        ehComentario = false;
-                        continue;
-                    }
-                    
-                    int inicioComentario = linha.indexOf("<!--", pos);
-                    if (inicioComentario != -1 && inicioComentario == linha.indexOf("<", pos)) {
-                        ehComentario = true;
-                        pos = inicioComentario + 4;
+                        position = fimComentario + 3;
+                        isComent = false;
                         continue;
                     }
 
-                    int inicio = linha.indexOf("<", pos);
+                    // Verifica o início de comentários
+                    int inicioComentario = linha.indexOf("<!--", position);
+                    if (inicioComentario != -1 && inicioComentario == linha.indexOf("<", position)) {
+                        isComent = true;
+                        position = inicioComentario + 4;
+                        continue;
+                    }
+
+                    // Localiza o inicio da tag
+                    int inicio = linha.indexOf("<", position);
                     if (inicio == -1) 
                         break;
 
-                    if (ehComentario) {
-                        pos = inicio + 1;
+                    if (isComent) {
+                        position = inicio + 1;
                         continue;
                     }
 
@@ -68,72 +91,78 @@ public class Validator {
 
                     String tagCompleta = linha.substring(inicio + 1, fim).trim();
                     boolean fechamentoTag = tagCompleta.startsWith("/");
-                    String tagName = Util.extrairTagName(tagCompleta).toLowerCase();
+                    String tagName = Util.extractTagName(tagCompleta).toLowerCase();
 
-                    if (!ehScript && !ehStyle && !fechamentoTag) {
+                    // Identifica entrada e saída de <script> e <style>
+                    if (!isScript && !isStyle && !fechamentoTag) {
                         if (tagName.equals("script")) {
-                            ehScript = true;
+                            isScript = true;
                         } else if (tagName.equals("style")) {
-                            ehStyle = true;
+                            isStyle = true;
                         }
-                    } else if (ehScript && fechamentoTag && tagName.equals("script")) {
-                        ehScript = false;
-                        pos = fim + 1;
+                    } else if (isScript && fechamentoTag && tagName.equals("script")) {
+                        isScript = false;
+                        position = fim + 1;
                         continue;
-                    } else if (ehStyle && fechamentoTag && tagName.equals("style")) {
-                        ehStyle = false;
-                        pos = fim + 1;
-                        continue;
-                    }
-
-                    if (ehScript || ehStyle) {
-                        pos = fim + 1;
+                    } else if (isStyle && fechamentoTag && tagName.equals("style")) {
+                        isStyle = false;
+                        position = fim + 1;
                         continue;
                     }
 
-                    boolean ehSingletonTag = verificarSingletonTag(tagCompleta, tagName);
+                    // Ignora o conteúdo interno de <script> e <style>
+                    if (isScript || isStyle) {
+                        position = fim + 1;
+                        continue;
+                    }
 
-                    if (ehSingletonTag) {
-                        contadorTag.adicionar(tagName);
-                    } else if (fechamentoTag) {
-                        if (pilhaLista.estaVazia()) {
-                            report.append("Erro linha ").append(linhaNum)
+                    boolean isSingletonTag = verificarSingletonTag(tagCompleta, tagName);
+
+                    // Realiza as verificações das tags
+                    if (isSingletonTag) { // se for singleTon, adiciona na lista
+                        contadorTag.add(tagName);
+                    } else if (fechamentoTag) { // verifica se é uma tag de fechamento
+                        if (pilhaLista.estaVazia()) { // se possuir fechamento sem abrir, reporta erro
+                            report.append("Erro linha ").append(numeroLinha)
                                   .append(": tag final </").append(tagName)
                                   .append("> sem correspondente de abertura.\n");
-                            estaComErro = true;
-                            pos = fim + 1; 
+                            haveError = true;
+                            position = fim + 1;
                             continue;
                         }
                         String lastOpened = pilhaLista.pop();
-                        if (!lastOpened.equals(tagName)) {
+                        if (!lastOpened.equals(tagName)) { // verifica se a tag no topo da pilha é diferente da tag de fechamento
 
-                            report.append("Erro linha ").append(linhaNum)
+                            report.append("Erro linha ").append(numeroLinha)
                                   .append(": esperava </").append(lastOpened)
                                   .append(">, mas encontrou </").append(tagName).append(">\n");
-                            estaComErro = true;
 
+                            haveError = true;
+
+                            // Pega a tag no topo da pilha que é diferente da tag sendo lida
                             while (!pilhaLista.estaVazia() && !pilhaLista.peek().equals(tagName)) {
                                 String missing = pilhaLista.pop();
                                 report.append("Faltando tag final para <").append(missing).append(">\n");
                             }
                             if (!pilhaLista.estaVazia()) {
-                                pilhaLista.pop();
+                                pilhaLista.pop(); // Remove a tag correspondente de fechamento da pilha
                             }
-                            pos = fim + 1;
+                            position = fim + 1;
                             continue;
                         }
                     } else {
-                        pilhaLista.push(tagName);
-                        contadorTag.adicionar(tagName);
+                        pilhaLista.push(tagName); // adiciona tag na pilha para achar o fechamento
+                        contadorTag.add(tagName); // adiciona a tag na lista de contador
                     }
 
-                    pos = fim + 1;
+                    position = fim + 1;
                 }
             }
 
+            // Verifica se ainda existem tags abertas sem fechamento
             while (!pilhaLista.estaVazia()) {
                 report.append("Faltando tag final para <").append(pilhaLista.pop()).append(">\n");
-                estaComErro = true;
+                haveError = true;
             }
 
         } catch (Exception e) {
@@ -141,51 +170,51 @@ public class Validator {
             return false;
         }
 
-        if (estaComErro) {
+        if (haveError) {
             return false;
         }
         report.append("Arquivo está bem formatado!\n");
         return true;
     }
 
+    /// Encontra o fim de uma tag considerando aspas e atributos.
     private int encontrarTagFim(String linha, int inicio) {
         int fim = inicio + 1;
-        boolean dentroDeAspas = false;
+        boolean isDentroDeAspas = false;
         char quoteChar = 0;
+
         while (fim < linha.length()) {
-            char c = linha.charAt(fim);
-            if ((c == '"' || c == '\'') && (fim == inicio + 1 || linha.charAt(fim - 1) != '\\')) {
-                if (!dentroDeAspas) {
-                    dentroDeAspas = true;
-                    quoteChar = c;
-                } else if (c == quoteChar) {
-                    dentroDeAspas = false;
+            char caractere = linha.charAt(fim);
+
+            if ((caractere == '"' || caractere == '\'') && (fim == inicio + 1 || linha.charAt(fim - 1) != '\\')) {
+                if (!isDentroDeAspas) {
+                    isDentroDeAspas = true;
+                    quoteChar = caractere;
+                } else if (caractere == quoteChar) {
+                    isDentroDeAspas = false;
                 }
-            } else if (c == '>' && !dentroDeAspas) {
+            } else if (caractere == '>' && !isDentroDeAspas) {
                 return fim;
             }
+
             fim++;
         }
+
         return -1;
     }
 
+    /// Verifica se uma tag é do tipo singleton (auto-fechável).
     private boolean verificarSingletonTag(String tagCompleta, String tagName) {
         if (tagCompleta.endsWith("/")) {
             return true;
         }
-        for (int i = 0; i < singletons.length; i++) {
-            if (singletons[i].equals(tagName)) {
+
+        for (String singleton : singletons) {
+            if (singleton.equals(tagName)) {
                 return true;
             }
         }
+
         return false;
-    }
-
-    public String getReport() {
-        return report.toString();
-    }
-
-    public ContadorTag getContadorTag() {
-        return contadorTag;
     }
 }

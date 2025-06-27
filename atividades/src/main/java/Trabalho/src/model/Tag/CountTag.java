@@ -4,10 +4,12 @@ import Trabalho.src.model.Lista.ListaEncadeada;
 import Trabalho.src.model.Lista.NoLista;
 import Trabalho.src.model.Ordenacao.*;
 
-public class ContadorTag {
+public class CountTag {
+
     private final ListaEncadeada<TagInfo> tags = new ListaEncadeada<>();
 
-    public void adicionar(String tag) {
+    /// Adiciona a tag na lista
+    public void add(String tag) {
         tag = tag.toLowerCase();
 
         int tamanho = tags.obterComprimento();

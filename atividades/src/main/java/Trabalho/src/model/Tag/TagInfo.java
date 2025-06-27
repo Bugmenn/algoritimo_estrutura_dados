@@ -1,17 +1,20 @@
 package Trabalho.src.model.Tag;
 
 public class TagInfo implements Comparable<TagInfo> {
-    private final String nome;
-    private int contador;
 
-    @Override
-    public int compareTo(TagInfo other) {
-        return this.nome.compareTo(other.nome);
-    }
+    /// Nome da tag
+    private final String nome;
+    /// Quantidade da tag
+    private int contador;
 
     public TagInfo(String nome) {
         this.nome = nome;
         this.contador = 1;
+    }
+
+    @Override
+    public int compareTo(TagInfo other) {
+        return this.nome.compareTo(other.nome);
     }
 
     public void incrementar() {

@@ -7,14 +7,16 @@ public class OrdenacaoQuickSort<T extends Comparable<T>> extends OrdenacaoAbstra
         quickSort(0, getInfo().length - 1);
     }
 
+    /// Metodo que divide o vetor em subvetores.
     private void quickSort(int inicio, int fim) {
         if (inicio < fim) {
-            int pivo = particionar(inicio, fim);
-            quickSort(inicio, pivo - 1);
-            quickSort(pivo + 1, fim);
+            int pivo = particionar(inicio, fim); // Particiona o vetor e pega a posição final do pivo
+            quickSort(inicio, pivo - 1); // Ordena subparte da esquerda do pivo
+            quickSort(pivo + 1, fim); // Ordena subparte da direita do pivo
         }
     }
 
+    /// Reorganiza os elementos em torno do pivo
     private int particionar(int inicio, int fim) {
         T[] vetor = getInfo();
         T pivo = vetor[inicio];

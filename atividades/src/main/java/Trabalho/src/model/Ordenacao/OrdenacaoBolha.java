@@ -1,6 +1,7 @@
 package Trabalho.src.model.Ordenacao;
 
 public class OrdenacaoBolha<T extends Comparable<T>> extends OrdenacaoAbstract<T> {
+
     @Override
     public void ordenar() {
         T[] vetor = getInfo();

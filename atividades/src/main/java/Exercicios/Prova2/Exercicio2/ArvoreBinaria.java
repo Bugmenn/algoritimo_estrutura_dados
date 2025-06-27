@@ -1,4 +1,6 @@
-package Exercicios.Prova2;
+package Exercicios.Prova2.Exercicio2;
+
+import Exercicios.ArvoreBinaria.NoArvoreBinaria;
 
 public class ArvoreBinaria<T> {
 
@@ -55,46 +57,31 @@ public class ArvoreBinaria<T> {
         return 1 + contarNos(no.getEsquerda()) + contarNos(no.getDireita());
     }
 
-    public boolean isDegenerada() {
-        if (raiz == null || (raiz.getEsquerda() == null && raiz.getDireita() == null)) {
-            return false;
+    public int contarFolhas(NoArvoreBinaria<T> sa) {
+        if (sa == null) {
+            return 0;
+        } else if (sa.getEsquerda() == null && sa.getDireita() == null) {
+            return 1;
         }
 
-        NoArvoreBinaria<T> atual = raiz;
-
-        while (atual != null) {
-            NoArvoreBinaria<T> esq = atual.getEsquerda();
-            NoArvoreBinaria<T> dir = atual.getDireita();
-
-            if (esq != null && dir != null) {
-                return false;
-            }
-
-            atual = (esq != null) ? esq : dir;
-        }
-
-        return true;
+        return contarFolhas(sa.getEsquerda()) + contarFolhas(sa.getDireita());
     }
 
     public static void main(String[] args) {
         ArvoreBinaria<Integer> arvore = new ArvoreBinaria<>();
+        NoArvoreBinaria<Integer> raiz = new NoArvoreBinaria<>(1);
 
-        NoArvoreBinaria<Integer> no4 = new NoArvoreBinaria<>(4);
-        NoArvoreBinaria<Integer> no3 = new NoArvoreBinaria<>(3, no4, null);
-        NoArvoreBinaria<Integer> no2 = new NoArvoreBinaria<>(2, no3, null);
-        NoArvoreBinaria<Integer> no1 = new NoArvoreBinaria<>(1, no2, null);
+        NoArvoreBinaria<Integer> esquerdaRaiz = new NoArvoreBinaria<>(2,
+                null, new NoArvoreBinaria<Integer>(4));
 
-        arvore.setRaiz(no1);
+        NoArvoreBinaria<Integer> direitaRaiz = new NoArvoreBinaria<>(3,
+                new NoArvoreBinaria<Integer>(5), new NoArvoreBinaria<Integer>(6));
 
-        boolean isDegenerada = arvore.isDegenerada();
+        raiz.setEsquerda(esquerdaRaiz);
+        raiz.setDireita(direitaRaiz);
+        arvore.setRaiz(raiz);
 
-        no4 = new NoArvoreBinaria<>(4);
-        no3 = new NoArvoreBinaria<>(3, no4, null);
-        no2 = new NoArvoreBinaria<>(2, null, no3);
-        no1 = new NoArvoreBinaria<>(1, no2, null);
-
-        arvore.setRaiz(no1);
-
-        isDegenerada = arvore.isDegenerada();
+        int quantidadeFolhas = arvore.contarFolhas(arvore.raiz);
+        System.out.println("quantidade folhas:" + quantidadeFolhas);
     }
 }

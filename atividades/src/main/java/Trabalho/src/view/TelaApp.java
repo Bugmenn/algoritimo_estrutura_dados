@@ -2,6 +2,7 @@ package Trabalho.src.view;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 import Trabalho.src.model.Tag.TagInfo;
@@ -10,7 +11,10 @@ import Trabalho.src.validator.Validator;
 public class TelaApp extends JFrame {
     private final JTextField txtCaminho = new JTextField(30);
     private final JTextArea txtResultado = new JTextArea(6, 50);
-    private final JTextArea txtTags = new JTextArea(15, 50); 
+
+    private final String[] colunasTabela = { "Tag", "Contador" };
+    private final DefaultTableModel tableModel = new DefaultTableModel(colunasTabela, 0);
+    private final JTable tblTags = new JTable(tableModel);
 
     public TelaApp() {
         setTitle("Validador HTML");
@@ -18,15 +22,14 @@ public class TelaApp extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         getContentPane().setLayout(new BorderLayout());
 
-        txtTags.setEditable(false);
-        txtTags.setFont(new Font("Monospaced", Font.PLAIN, 14));
-        txtTags.setBackground(new Color(30, 30, 30));
-        txtTags.setForeground(new Color(212, 212, 212));
-        txtTags.setCaretColor(Color.WHITE);
-        txtResultado.setBackground(new Color(158, 158, 160));
+        tblTags.setFont(new Font("Monospaced", Font.PLAIN, 14));
+        tblTags.setEnabled(false);
+        tblTags.setBackground(new Color(197, 197, 198));
+        tblTags.setRowHeight(22);
 
         txtResultado.setEditable(false);
         txtResultado.setFont(new Font("SansSerif", Font.PLAIN, 13));
+        txtResultado.setBackground(new Color(158, 158, 160));
 
         JPanel topo = new JPanel();
         JButton btnEscolher = new JButton("Escolher arquivo");
@@ -62,21 +65,20 @@ public class TelaApp extends JFrame {
                 boolean ok = validator.validar(path);
                 txtResultado.setText(validator.getReport());
 
+                tableModel.setRowCount(0);
+
                 if (ok) {
-                    StringBuilder sb = new StringBuilder("Tags encontradas:\n\n");
-                    for (TagInfo tag : validator.getContadorTag().getTagsOrdenadas()) {
-                        sb.append("<").append(tag.getNome()).append(">: ")
-                          .append(tag.getContador()).append("\n");
+                    for (TagInfo tag : validator.getCountTag().getTagsOrdenadas()) {
+                        tableModel.addRow(new Object[]{tag.getNome(), tag.getContador() });
                     }
-                    txtTags.setText(sb.toString());
-                } else {
-                    txtTags.setText("");
                 }
             }
         });
 
-        JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,
-            new JScrollPane(txtResultado), new JScrollPane(txtTags));
+        JScrollPane scrollTabela = new JScrollPane(tblTags);
+        scrollTabela.getViewport().setBackground(new Color(158, 158, 160));
+
+        JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, new JScrollPane(txtResultado), scrollTabela);
         splitPane.setResizeWeight(0.5);
 
         getContentPane().add(topo, BorderLayout.NORTH);
