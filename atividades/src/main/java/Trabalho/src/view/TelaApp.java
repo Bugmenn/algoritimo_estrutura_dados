@@ -62,13 +62,14 @@ public class TelaApp extends JFrame {
             String path = txtCaminho.getText();
             if (!path.isBlank()) {
                 Validator validator = new Validator();
-                boolean ok = validator.validar(path);
+                boolean validatorResult = validator.validar(path);
                 txtResultado.setText(validator.getReport());
 
+                // Limpa a tabela
                 tableModel.setRowCount(0);
 
                 // Ordena a lista de tags e adiciona na tabela
-                if (ok) {
+                if (validatorResult) {
                     for (TagInfo tag : validator.getCountTag().getTagsOrdenadas()) {
                         tableModel.addRow(new Object[]{tag.getNome(), tag.getQuantidade() });
                     }
