@@ -1,4 +1,4 @@
-package Exercicios.Busca;
+package Exercicios.ex10.Busca;
 
 public class ListaOrdenada<T extends Comparable<T>> extends ListaAbstract<T> {
 

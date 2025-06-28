@@ -1,6 +1,6 @@
 package ExerciciosTest;
 
-import Exercicios.Busca.ListaOrdenada;
+import Exercicios.ex10.Busca.ListaOrdenada;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

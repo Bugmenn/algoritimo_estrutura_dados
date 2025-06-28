@@ -1,4 +1,4 @@
-package Exercicios.Busca;
+package Exercicios.ex10.Busca;
 
 public abstract class ListaAbstract<T> {
 

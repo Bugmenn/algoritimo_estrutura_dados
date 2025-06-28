@@ -1,7 +1,5 @@
 package Exercicios.ArvoreBinariaBusca;
 
-import Exercicios.Busca.ListaAbstract;
-
 public class ArvoreBinariaBusca<T extends Comparable<T>> extends ArvoreBinariaAbstract<T> {
 
     public void inserir(T info) {
