@@ -39,7 +39,7 @@ public class TelaApp extends JFrame {
         btnValidar.setBackground(new Color(255, 128, 64));
         btnValidar.setForeground(Color.WHITE);
 
-        topo.add(new JLabel("Arquivo:"));
+        topo.add(new JLabel("Caminho do arquivo:"));
         topo.add(txtCaminho);
         topo.add(btnEscolher);
         topo.add(btnValidar);

@@ -12,6 +12,7 @@
 
 # Package Files #
 *.jar
+!Trabalho.jar
 *.war
 *.nar
 *.ear
