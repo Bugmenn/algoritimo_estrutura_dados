@@ -48,7 +48,7 @@ public class TelaApp extends JFrame {
         btnEscolher.addActionListener(e -> {
             JFileChooser chooser = new JFileChooser();
 
-            // Filto para só conseguir escolher html
+            // Filtro para só conseguir escolher html
             FileNameExtensionFilter filtro = new FileNameExtensionFilter("Arquivos HTML", "html");
             chooser.setFileFilter(filtro);
 
@@ -67,6 +67,7 @@ public class TelaApp extends JFrame {
 
                 tableModel.setRowCount(0);
 
+                // Ordena a lista de tags e adiciona na tabela
                 if (ok) {
                     for (TagInfo tag : validator.getCountTag().getTagsOrdenadas()) {
                         tableModel.addRow(new Object[]{tag.getNome(), tag.getQuantidade() });
