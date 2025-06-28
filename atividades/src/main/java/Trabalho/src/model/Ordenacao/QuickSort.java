@@ -2,12 +2,13 @@ package Trabalho.src.model.Ordenacao;
 
 public class QuickSort<T extends Comparable<T>> extends SortAbstract<T> {
 
+    /// Ordena o vetor com base no quick sort
     @Override
     public void ordenar() {
         quickSort(0, getInfo().length - 1);
     }
 
-    /// Metodo que divide o vetor em subvetores.
+    /// Metodo que divide o vetor em subvetores
     private void quickSort(int inicio, int fim) {
         if (inicio < fim) {
             int pivo = particionar(inicio, fim); // Particiona o vetor e pega a posição final do pivo

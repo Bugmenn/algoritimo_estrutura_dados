@@ -2,6 +2,7 @@ package Trabalho.src.model.Ordenacao;
 
 public class BubbleSort<T extends Comparable<T>> extends SortAbstract<T> {
 
+    /// Ordena os valores com base na comparação usando bubble sort
     @Override
     public void ordenar() {
         T[] vetor = getInfo();

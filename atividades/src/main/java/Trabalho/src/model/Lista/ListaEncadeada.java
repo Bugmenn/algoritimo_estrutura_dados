@@ -13,6 +13,7 @@ public class ListaEncadeada<T> {
     }
 
     /// Insere um novo nó, apontando o proximo usando primeiro como base
+    /// @param info valor a inserir
     public void inserir(T info) {
         NoLista<T> novo = new NoLista<>();
         novo.setInfo(info);
@@ -27,7 +28,7 @@ public class ListaEncadeada<T> {
     }
 
     /// Busca um valor dentro dos nós
-    /// @return o valor caso encontrado, caso não retorna null
+    /// @return {@link NoLista} o valor caso encontrado, caso não retorna null
     public NoLista<T> buscar(T info) {
         NoLista<T> p = primeiro;
 
@@ -43,6 +44,7 @@ public class ListaEncadeada<T> {
 
     /// Procura nó que contém dado a ser removido,
     /// guardando o anterior
+    /// @param info valor a retirar
     public void retirar(T info) {
         NoLista<T> anterior = null;
         NoLista<T> p = primeiro;
@@ -65,7 +67,7 @@ public class ListaEncadeada<T> {
     }
 
     /// Pega o comprimento da lista
-    /// @return int sendo o tamanho
+    /// @return {@code int} sendo o tamanho
     public int obterComprimento() {
         NoLista<T> p = primeiro;
         int comprimento = 0;
@@ -80,6 +82,7 @@ public class ListaEncadeada<T> {
 
     /// Obtém o nó especifico
     /// @throws IndexOutOfBoundsException caso o index não seja valido
+    /// @return retorna {@link NoLista} caso ache, caso não ache retorna o valor vazio
     public NoLista<T> obterNo(int idx) {
         if (idx < 0 || idx > obterComprimento())
             throw new IndexOutOfBoundsException("Tamanho incorreto");
@@ -97,7 +100,7 @@ public class ListaEncadeada<T> {
     }
 
     /// Transforma a lista numa “string” com os valores separados por vírgula
-    /// @return lista transformada
+    /// @return lista transformada em {@code String}
     @Override
     public String toString() {
         NoLista<T> p = primeiro;

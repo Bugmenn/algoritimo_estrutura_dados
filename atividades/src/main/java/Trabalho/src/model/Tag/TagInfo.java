@@ -12,11 +12,14 @@ public class TagInfo implements Comparable<TagInfo> {
         this.quantidade = 1;
     }
 
+    /// Compara o nome da tag com outro nome do objeto {@link TagInfo}
+    /// @param other outro objeto {@link TagInfo}
     @Override
     public int compareTo(TagInfo other) {
         return this.nome.compareTo(other.nome);
     }
 
+    /// Aumenta a quantidade que a tag especifica aparece
     public void incrementar() {
         quantidade++;
     }

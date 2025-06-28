@@ -6,9 +6,11 @@ import Trabalho.src.model.Ordenacao.*;
 
 public class CountTag {
 
+    /// Lista de tags
     private final ListaEncadeada<TagInfo> tags = new ListaEncadeada<>();
 
-    /// Adiciona a tag na lista
+    /// Adiciona a tag na lista, caso a tag já exista na lista é aumentado a quantidade de ocorrências
+    /// @param tag tag a ser inserida na lista
     public void add(String tag) {
         tag = tag.toLowerCase();
 
@@ -26,6 +28,9 @@ public class CountTag {
         tags.inserir(new TagInfo(tag));
     }
 
+    /// Ordena as tags da lista, cria um vetor e realiza a ordenação com base no vetor.
+    /// Caso o vetor tenha 10 ou menos elementos realiza o bubble sort.
+    /// Se tiver mais de 10 elementos realiza quick sort
     public TagInfo[] getTagsOrdenadas() {
         
         int tamanho = tags.obterComprimento();
