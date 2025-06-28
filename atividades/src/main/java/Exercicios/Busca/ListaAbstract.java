@@ -1,41 +1,38 @@
 package Exercicios.Busca;
 
 public abstract class ListaAbstract<T> {
-    protected T[] info;
+
+    protected Object[] info;
     protected int tamanho;
 
-    private static int TAMANHO_INICIAL = 10;
+    private static final int TAMANHO_INICIAL = 10;
 
-    @SuppressWarnings("unchecked")
     public ListaAbstract()
     {
-        info = (T[]) new Object[TAMANHO_INICIAL];
+        info = new Object[TAMANHO_INICIAL];
         tamanho = 0;
     }
 
-    public T[] getInfo() {
-        return info;
-    }
-
-    public void setTamanho(int tamanho) {
-        this.tamanho = tamanho;
-    }
-
-    /// pega o tamanho do vetor
+    /// Pega o tamanho do vetor
     /// @return tamanho do vetor
     public int getTamanho() {
         return tamanho;
     }
 
-    @SuppressWarnings({"unchecked", "ManualArrayCopy"})
+    protected void setTamanho(int tamanho) {
+        this.tamanho = tamanho;
+    }
+
+    protected Object[] getInfo() {
+        return info;
+    }
+
+    @SuppressWarnings("ManualArrayCopy")
     /// Aumenta o tamanho do vetor em 10
     /// caso chegue no tamanho maximo
     protected void redimensionar()
     {
-        T[] novoVetor = (T[]) new Object[info.length * 2];
-
-        // cria uma copia do vetor
-        // System.arraycopy(info, 0, novoVetor, 0, info.length);
+        Object[] novoVetor = new Object[info.length * 2];
 
         for (int i = 0; i < tamanho; i++) {
             novoVetor[i] = info[i];
@@ -49,7 +46,7 @@ public abstract class ListaAbstract<T> {
     /// é aumentado
     public abstract void inserir(T valor);
 
-    /// imprime os valores do vetor
+    /// Imprime os valores do vetor
     public void exibir()
     {
         for (int i = 0; i < tamanho; i++) {
@@ -57,7 +54,7 @@ public abstract class ListaAbstract<T> {
         }
     }
 
-    /// busca algum valor no vetor
+    /// Busca algum valor no vetor
     /// @return indice do valor ou -1 caso não existe
     public abstract int buscar(T valor);
 
@@ -76,27 +73,26 @@ public abstract class ListaAbstract<T> {
         }
     }
 
-    @SuppressWarnings("unchecked")
     /// volta o vetor ao estado original
     public void liberar()
     {
-        info = (T[]) new Object[TAMANHO_INICIAL];
+        info = new Object[TAMANHO_INICIAL];
         tamanho = 0;
     }
 
 
     /// pega o valor da posição especificada
     /// @throws IndexOutOfBoundsException caso a posição for invalida
-    public T obterElemento(int posicao)
+    public T obterElemento(int pos)
     {
-        if (posicao < 0 || posicao >= tamanho) {
-            throw new IndexOutOfBoundsException("Posição inválida: " + posicao);
+        if (pos < 0 || pos >= tamanho) {
+            throw new IndexOutOfBoundsException("Posição inválida: " + pos);
         }
-        return info[posicao];
+        return (T) info[pos];
     }
 
     /// verifica se o vetor está vazio
-    /// @return boleano true se está vazio
+    /// @return booleano true se está vazio
     public boolean estaVazia() {
         return tamanho == 0;
     }
@@ -116,18 +112,5 @@ public abstract class ListaAbstract<T> {
         }
 
         return texto.toString();
-    }
-
-    /// inverte a lista, faz o for usando metade do tamanho,
-    /// assim guarda o primeiro elemento, pega o ultimo com base no (i - 1),
-    /// por que index começa no 0 e tamanho começa no 1. Quando tamanho é subtraido
-    /// por i, resulta em sempre pegar o valor oposto da lista.
-    public void inverter()
-    {
-        for (int i = 0; i < tamanho / 2; i++) {
-            T temp = info[i];
-            info[i] = info[tamanho - 1 - i];
-            info[tamanho - 1 - i] = temp;
-        }
     }
 }

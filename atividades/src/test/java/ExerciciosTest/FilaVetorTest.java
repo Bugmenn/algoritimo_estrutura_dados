@@ -1,8 +1,8 @@
 package ExerciciosTest;
 
-import Exercicios.FilaVetor.FilaCheiaException;
-import Exercicios.FilaVetor.FilaVaziaException;
-import Exercicios.FilaVetor.FilaVetor;
+import Exercicios.ex6.FilaVetor.FilaCheiaException;
+import Exercicios.ex6.FilaVetor.FilaVaziaException;
+import Exercicios.ex6.FilaVetor.FilaVetor;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

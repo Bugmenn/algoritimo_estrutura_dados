@@ -1,6 +1,6 @@
 package Exercicios.Prova2.Exercicio2;
 
-import Exercicios.ArvoreBinaria.NoArvoreBinaria;
+import Exercicios.ex7.ArvoreBinaria.NoArvoreBinaria;
 
 public class ArvoreBinaria<T> {
 

@@ -1,7 +1,7 @@
 package ExerciciosTest;
 
-import Exercicios.ArvoreBinaria.ArvoreBinaria;
-import Exercicios.ArvoreBinaria.NoArvoreBinaria;
+import Exercicios.ex7.ArvoreBinaria.ArvoreBinaria;
+import Exercicios.ex7.ArvoreBinaria.NoArvoreBinaria;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

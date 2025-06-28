@@ -2,50 +2,47 @@ package Exercicios.Busca;
 
 public class ListaOrdenada<T extends Comparable<T>> extends ListaAbstract<T> {
 
+    @Override
     public void inserir(T valor)
     {
-        Object[] info = getInfo();
-        int tamanho = getTamanho();
-
-        if (tamanho >= info.length)
-        {
+        if (tamanho == info.length) {
             redimensionar();
-            info = getInfo();
         }
 
-        // Faz a verificação para ordenar os valores
-        // Caso achar que o valor informado é menor que o número anterior
-        // i mantém o valor para o próximo laço de repetição
-        int i;
-        for (i = 0; i < tamanho; i++) {
-            if (valor.compareTo((T) info[i]) < 0) {
-                break;
-            }
+        Object[] info = getInfo();
+
+        // Verifica a posição correta para inserir e mantém a ordem
+        int posicao = 0;
+        while (posicao < tamanho && valor.compareTo((T) info[posicao]) > 0) {
+            posicao++;
         }
 
-        for (int j = tamanho; j > i; j--) {
-            info[j] = info[j - 1];
+        // Anda as informações para direita
+        for (int i = tamanho; i > posicao; i--) {
+            info[i] = info[i - 1];
         }
 
-        info[i] = valor;
+        info[posicao] = valor;
         setTamanho(tamanho + 1);
     }
 
+    @Override
     public int buscar(T valor)
     {
         Object[] info = getInfo();
+
         int inicio = 0;
-        int fim = getTamanho() - 1;
+        int fim = tamanho - 1;
 
         while (inicio <= fim) {
             int meio = (inicio + fim) / 2;
-            int comparacao = valor.compareTo((T)info[meio]);
+            int comparacao = valor.compareTo((T) info[meio]);
 
             if (comparacao == 0) {
                 return meio;
-            } else if (comparacao < 0) {
+            } else if (comparacao < 0) { // Busca na metade da esquerda
                 fim = meio - 1;
-            } else {
+            } else { // Busca na metade da direita
                 inicio = meio + 1;
             }
         }

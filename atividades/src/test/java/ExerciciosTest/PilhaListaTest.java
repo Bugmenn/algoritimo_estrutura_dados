@@ -1,6 +1,6 @@
 package ExerciciosTest;
 
-import Exercicios.PilhaLista.PilhaLista;
+import Exercicios.ex5.PilhaLista.PilhaLista;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

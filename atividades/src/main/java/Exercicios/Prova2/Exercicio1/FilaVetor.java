@@ -1,8 +1,8 @@
 package Exercicios.Prova2.Exercicio1;
 
-import Exercicios.FilaVetor.Fila;
-import Exercicios.FilaVetor.FilaCheiaException;
-import Exercicios.FilaVetor.FilaVaziaException;
+import Exercicios.ex6.FilaVetor.Fila;
+import Exercicios.ex6.FilaVetor.FilaCheiaException;
+import Exercicios.ex6.FilaVetor.FilaVaziaException;
 
 public class FilaVetor<T> implements Fila<T> {
 

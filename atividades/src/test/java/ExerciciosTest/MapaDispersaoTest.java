@@ -1,6 +1,7 @@
 package ExerciciosTest;
 
-import Exercicios.MapaDispersao.*;
+import Exercicios.ex9.MapaDispersao.Aluno;
+import Exercicios.ex9.MapaDispersao.MapaDispersao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

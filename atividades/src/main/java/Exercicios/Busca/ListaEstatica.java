@@ -5,30 +5,25 @@ public class ListaEstatica<T> extends ListaAbstract<T> {
     @Override
     public void inserir(T valor)
     {
-        T[] info = getInfo();
-
-        if (getTamanho() >= info.length)
-        {
+        if (tamanho == info.length) {
             redimensionar();
-            info = getInfo();
         }
 
-        info[getTamanho()] = valor;
-        setTamanho(getTamanho() + 1);
+        Object[] infoLocal = getInfo();
+        infoLocal[tamanho] = valor;
+        setTamanho(tamanho + 1);
     }
 
     @Override
     public int buscar(T valor)
     {
-        T[] info = getInfo();
+        Object[] info = getInfo();
 
-        for (int i = 0; i < getTamanho(); i++) {
-            if (info[i].equals(valor))
-            {
+        for (int i = 0; i < tamanho; i++) {
+            if (info[i].equals(valor)) {
                 return i;
             }
         }
-
         return -1;
     }
 }

@@ -1,7 +1,7 @@
 package ExerciciosTest;
 
-import Exercicios.ArvoreNAria.Arvore;
-import Exercicios.ArvoreNAria.NoArvore;
+import Exercicios.ex8.ArvoreNAria.Arvore;
+import Exercicios.ex8.ArvoreNAria.NoArvore;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,7 +1,7 @@
 package ExerciciosTest;
 
-import Exercicios.ListaDuplaEncadeada.ListaDupla;
-import Exercicios.ListaDuplaEncadeada.NoListaDupla;
+import Exercicios.ex4.ListaDuplaEncadeada.ListaDupla;
+import Exercicios.ex4.ListaDuplaEncadeada.NoListaDupla;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

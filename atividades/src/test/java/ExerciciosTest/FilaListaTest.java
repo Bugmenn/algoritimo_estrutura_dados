@@ -1,6 +1,6 @@
 package ExerciciosTest;
 
-import Exercicios.FilaListaEncadeada.FilaLista;
+import Exercicios.ex6.FilaListaEncadeada.FilaLista;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
