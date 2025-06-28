@@ -5,11 +5,11 @@ public class TagInfo implements Comparable<TagInfo> {
     /// Nome da tag
     private final String nome;
     /// Quantidade da tag
-    private int contador;
+    private int quantidade;
 
     public TagInfo(String nome) {
         this.nome = nome;
-        this.contador = 1;
+        this.quantidade = 1;
     }
 
     @Override
@@ -18,14 +18,14 @@ public class TagInfo implements Comparable<TagInfo> {
     }
 
     public void incrementar() {
-        contador++;
+        quantidade++;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public int getContador() {
-        return contador;
+    public int getQuantidade() {
+        return quantidade;
     }
 }

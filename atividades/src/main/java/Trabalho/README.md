@@ -1,6 +1,6 @@
 <h1 align="center">Validador HTML</h1>
 <p>
-    Validador HTML criado por <b>Gabriel Bugmann</b>
+    Validador HTML criado por <b>Gabriel Bugmann Vanzuita</b>
     <br>
     Feito para a materia de <b>Algoritimo e Estrutura de Dados da Furb</b>
     <br>

@@ -35,12 +35,12 @@ public class CountTag {
             array[i] = tags.obterNo(i).getInfo();
         }
 
-        OrdenacaoAbstract<TagInfo> ordenador;
+        SortAbstract<TagInfo> ordenador;
 
         if (array.length <= 10) {
-            ordenador = new OrdenacaoBolha<TagInfo>();
+            ordenador = new BubbleSort<TagInfo>();
         } else {
-            ordenador = new OrdenacaoQuickSort<TagInfo>();
+            ordenador = new QuickSort<TagInfo>();
         }
 
         ordenador.setInfo(array); 

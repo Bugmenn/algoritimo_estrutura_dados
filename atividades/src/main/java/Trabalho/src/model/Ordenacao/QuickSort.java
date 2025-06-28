@@ -1,6 +1,6 @@
 package Trabalho.src.model.Ordenacao;
 
-public class OrdenacaoQuickSort<T extends Comparable<T>> extends OrdenacaoAbstract<T> {
+public class QuickSort<T extends Comparable<T>> extends SortAbstract<T> {
 
     @Override
     public void ordenar() {

@@ -69,7 +69,7 @@ public class TelaApp extends JFrame {
 
                 if (ok) {
                     for (TagInfo tag : validator.getCountTag().getTagsOrdenadas()) {
-                        tableModel.addRow(new Object[]{tag.getNome(), tag.getContador() });
+                        tableModel.addRow(new Object[]{tag.getNome(), tag.getQuantidade() });
                     }
                 }
             }

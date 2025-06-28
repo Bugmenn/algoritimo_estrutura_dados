@@ -1,6 +1,6 @@
 package Trabalho.src.model.Ordenacao;
 
-public abstract class OrdenacaoAbstract<T extends Comparable<T>> {
+public abstract class SortAbstract<T extends Comparable<T>> {
 
     private T[] info;
 
