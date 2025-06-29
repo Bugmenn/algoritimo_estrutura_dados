@@ -1,4 +1,4 @@
-package Exercicios.ArvoreBinariaBusca;
+package Exercicios.ex11.ArvoreBinariaBusca;
 
 public class NoArvoreBinaria<T> {
 

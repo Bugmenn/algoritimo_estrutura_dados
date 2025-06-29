@@ -1,4 +1,4 @@
-package Exercicios.ArvoreBinariaBusca;
+package Exercicios.ex11.ArvoreBinariaBusca;
 
 public abstract class ArvoreBinariaAbstract<T> {
 
@@ -20,15 +20,7 @@ public abstract class ArvoreBinariaAbstract<T> {
     }
 
     public boolean pertence(T info) {
-        return pertence(raiz, info);
-    }
-
-    private boolean pertence(NoArvoreBinaria<T> no, T info) {
-        if (no == null) {
-            return false;
-        }
-
-        return no.getInfo().equals(info) || pertence(no.getEsquerda(), info) || pertence(no.getDireita(), info);
+        return buscar(info) != null;
     }
 
     public abstract NoArvoreBinaria<T> buscar(T info);

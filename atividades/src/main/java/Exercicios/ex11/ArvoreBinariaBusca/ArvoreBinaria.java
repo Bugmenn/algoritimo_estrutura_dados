@@ -1,8 +1,6 @@
-package Exercicios.ArvoreBinariaBusca;
+package Exercicios.ex11.ArvoreBinariaBusca;
 
 public class ArvoreBinaria<T> extends ArvoreBinariaAbstract<T> {
-
-//    private Comparator<T> comparador;
 
     public void setRaiz(NoArvoreBinaria<T> raiz) {
         super.setRaiz(raiz);
