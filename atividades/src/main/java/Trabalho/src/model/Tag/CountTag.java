@@ -40,16 +40,10 @@ public class CountTag {
             array[i] = tags.obterNo(i).getInfo();
         }
 
-        SortAbstract<TagInfo> ordenador;
-
-        if (array.length <= 10) {
-            ordenador = new BubbleSort<TagInfo>();
-        } else {
-            ordenador = new QuickSort<TagInfo>();
-        }
-
-        ordenador.setInfo(array); 
+        SortAbstract<TagInfo> ordenador = array.length <= 10 ? new BubbleSort<>() : new QuickSort<>();
+        ordenador.setInfo(array);
         ordenador.ordenar();
+
         return array;
     }
 }
