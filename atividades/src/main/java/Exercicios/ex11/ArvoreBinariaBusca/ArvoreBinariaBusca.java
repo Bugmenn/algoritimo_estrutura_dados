@@ -38,10 +38,22 @@ public class ArvoreBinariaBusca<T extends Comparable<T>> extends ArvoreBinariaAb
     }
 
     private NoArvoreBinaria<T> extrairSucessor(NoArvoreBinaria<T> excluir) {
-        while (excluir.getEsquerda() != null) {
-            excluir = excluir.getEsquerda();
+        NoArvoreBinaria<T> atual = excluir.getDireita();
+        NoArvoreBinaria<T> paiSucessor = excluir;
+        NoArvoreBinaria<T> sucessor = excluir;
+
+        while (atual != null) {
+            paiSucessor = sucessor;
+            sucessor = atual;
+            atual = atual.getEsquerda();
         }
-        return excluir;
+
+        if (sucessor != excluir.getDireita()) {
+            paiSucessor.setEsquerda(sucessor.getDireita());
+            sucessor.setDireita(excluir.getDireita());
+        }
+
+        return sucessor;
     }
 
     public void retirar(T info) {
